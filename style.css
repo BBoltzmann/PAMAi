@@ -1,0 +1,303 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form label,
+form select,
+form input,
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form button {
+    background: #0056b3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background: #003d82;
+}
+
+/* Chart styles */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    /* Increased height for better visibility */
+    margin-top: 20px;
+    padding-left: 40px;
+    /* Space for y-axis labels */
+}
+
+.chart {
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.time-slot {
+    flex: 1;
+    position: relative;
+    text-align: center;
+}
+
+.load-bar,
+.generation-bar {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+}
+
+.load-bar {
+    background-color: blue;
+    left: 0;
+}
+
+.generation-bar {
+    background-color: green;
+    right: 0;
+}
+
+/* Y-axis label and markers */
+.y-axis-label {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    writing-mode: tb-rl;
+    /* Vertical text */
+    transform: rotate(180deg);
+    transform-origin: left bottom;
+    text-align: left;
+}
+
+.y-axis-markers {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    /* Align with bottom of the chart */
+}
+
+.y-axis-marker {
+    position: relative;
+    left: -10px;
+}
+
+/* X-axis time labels */
+.x-axis-labels {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    bottom: -20px;
+    left: 40px;
+    /* Align with y-axis labels */
+}
+
+.x-axis-label {
+    text-align: center;
+    width: calc(100% / 24);
+}
+
+/* Rate line styles */
+.rate-line {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    bottom: 0;
+}
+
+.less-expensive-line {
+    background-color: green;
+}
+
+.normal-rate-line {
+    background-color: yellow;
+}
+
+.more-expensive-line {
+    background-color: red;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form label,
+form select,
+form input,
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form button {
+    background: #0056b3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background: #003d82;
+}
+
+/* Chart styles */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    /* Increased height for better visibility */
+    margin-top: 20px;
+    padding-left: 40px;
+    /* Space for y-axis labels */
+}
+
+.chart {
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.time-slot {
+    flex: 1;
+    position: relative;
+    text-align: center;
+}
+
+.load-bar,
+.generation-bar {
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+}
+
+.load-bar {
+    background-color: blue;
+    left: 0;
+}
+
+.generation-bar {
+    background-color: green;
+    right: 0;
+}
+
+/* Y-axis label and markers */
+.y-axis-label {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    writing-mode: tb-rl;
+    /* Vertical text */
+    transform: rotate(180deg);
+    transform-origin: left bottom;
+    text-align: left;
+}
+
+.y-axis-markers {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    /* Align with bottom of the chart */
+}
+
+.y-axis-marker {
+    position: relative;
+    left: -10px;
+}
+
+/* X-axis time labels */
+.x-axis-labels {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    bottom: -20px;
+    left: 40px;
+    /* Align with y-axis labels */
+}
+
+.x-axis-label {
+    text-align: center;
+    width: calc(100% / 24);
+}
+
+/* Rate line styles */
+.rate-line {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    bottom: 0;
+}
+
+.less-expensive-line {
+    background-color: green;
+}
+
+.normal-rate-line {
+    background-color: yellow;
+}
+
+.more-expensive-line {
+    background-color: red;
+}
