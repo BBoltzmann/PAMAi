@@ -1,10 +1,108 @@
 import Head from "next/head";
+import React, { useState } from "react";
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+// } from "recharts";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
+
 
 export default function Home() {
+
+  const [profileName, setProfileName] = useState<string>("");
+  const [data, setData] = useState<
+    Array<{ hour: string; load: number; generation: number; rateClass: string }>
+  >([]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const selectedProfile = determineProfile(formData);
+    setProfileName(selectedProfile);
+    displayProfileChart(selectedProfile);
+  };
+
+  const determineProfile = (formData: FormData) => {
+    const energyGeneration = parseFloat(
+      formData.get("energyGeneration") as string
+    );
+    const peakUsage = formData.get("peakUsage") as string;
+
+    if (energyGeneration > 5) {
+      return "Eco Warriors";
+    } else if (peakUsage === "night") {
+      return "Night Owls";
+    } else {
+      return "Sunrise Savers"; // Default profile
+    }
+  };
+
+  const displayProfileChart = (profileName: string) => {
+    const chartData = generateChartData();
+    setData(chartData);
+  };
+
+  const generateChartData = () => {
+    const chartData: Array<{
+      hour: string;
+      load: number;
+      generation: number;
+      rateClass: string;
+    }> = [];
+    let totalGeneration = 0;
+
+    for (let hour = 0; hour < 24; hour++) {
+      const loadHeight = Math.random() * 100;
+      const generationHeight = Math.random() * 100;
+      totalGeneration += generationHeight;
+
+      const rateClass = determineRateClass(
+        generationHeight,
+        totalGeneration / 24
+      );
+
+      chartData.push({
+        hour: `${hour}:00`,
+        load: loadHeight,
+        generation: generationHeight,
+        rateClass: rateClass,
+      });
+    }
+
+    return chartData;
+  };
+
+  const determineRateClass = (
+    generationHeight: number,
+    averageGeneration: number
+  ) => {
+    if (generationHeight < averageGeneration * 0.5) {
+      return "more-expensive-line";
+    } else if (generationHeight > averageGeneration * 1.3) {
+      return "less-expensive-line";
+    } else {
+      return "normal-rate-line";
+    }
+  };
+
   return (
     <>
       <Head>
-        <title>Nubytes Admin for Lawyers</title>
+        <title>Pamai</title>
         <meta name="description" content="Admin" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -16,7 +114,7 @@ export default function Home() {
             Energy Profile Questionnaire
           </h1>
 
-          <form id="questionnaireForm" className="mb-8">
+          <form id="questionnaireForm" className="mb-8" onSubmit={handleSubmit}>
             <label htmlFor="peakUsage" className="block mb-2">
               Peak Energy Usage Times:
             </label>
@@ -99,6 +197,69 @@ export default function Home() {
               Submit
             </button>
           </form>
+        </div>
+
+        {/* <div
+          id="profileChart"
+          className="chart-container mx-auto p-8 bg-white rounded shadow-md"
+        >
+          {profileName && (
+            <BarChart
+              width={800}
+              height={400}
+              data={data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="hour" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="load" fill="#8884d8" />
+              <Bar dataKey="generation" fill="#82ca9d" />
+            </BarChart>
+          )}
+        </div> */}
+
+        <div
+          id="profileChart"
+          className="chart-container mx-auto p-8 bg-white rounded shadow-md"
+        >
+          {profileName && (
+            <div className="text-center">
+              <p className="text-xl font-bold mt-4">Your Energy Profile:</p>
+              <p className="text-2xl text-green-600">{profileName}</p>
+            </div>
+          )}
+
+          {profileName && (
+               <ResponsiveContainer width="100%" height={400}>
+            <LineChart
+              width={800}
+              height={400}
+              data={data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="hour" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="load"
+                stroke="#8884d8"
+                name="Load"
+              />
+              <Line
+                type="monotone"
+                dataKey="generation"
+                stroke="#82ca9d"
+                name="Generation"
+              />
+              </LineChart>
+              </ResponsiveContainer>
+          )}
         </div>
       </div>
 
